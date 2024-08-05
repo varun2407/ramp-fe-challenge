@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { InputCheckbox } from "../InputCheckbox"
 import { TransactionPaneComponent } from "./types"
 
@@ -9,6 +9,10 @@ export const TransactionPane: TransactionPaneComponent = ({
 }) => {
   const [approved, setApproved] = useState(transaction.approved)
 
+  useEffect(()=> {
+    setApproved(transaction.approved)
+  }, [transaction.approved])
+  
   const handleCheckboxChange = async (newValue: boolean)=> {
     await consumerSetTransactionApproval({
       transactionId: transaction.id,
